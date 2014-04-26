@@ -7,7 +7,7 @@
 void init(State *state){
 
     int i;
-    banner(0,75);
+    //banner(0,75);
     printf("WHEEL OF FORTUNE!\n");
 
     //Clearing tables and variables
@@ -30,16 +30,12 @@ void init(State *state){
 		scanf("%s",state->NAMES[i]);
 	}
 
-    printf("!\n");
-
 	//Reading list of phrases from file
 	FILE *fp;
 	fp = fopen("phrases.txt","r");
 	while(fscanf(fp, "%s", state->PHRASES[state->NUM_PHRASES++]) != EOF);
 	state->NUM_PHRASES--;
 	fclose(fp);
-
-    printf("Wczytalem\n");
 
 	int tmp = rand()%state->NUM_PHRASES;
 	for(i=0;i<strlen(state->PHRASES[tmp]);i++) state->PHRASE[i] = state->PHRASES[tmp][i];

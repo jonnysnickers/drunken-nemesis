@@ -8,9 +8,10 @@
 
 #ifdef _WIN32
     #include<windows.h>
+    #define CLEAR "cls"
 #elif __linux__
     #define Sleep sleep
-    #define System("cls") System("clear")
+    #define CLEAR "clear"
     #include<unistd.h>
 #endif
 
@@ -45,8 +46,8 @@ void banner(int START, int END){
         START = (START+1)%strlen(A[0]);
         END = (END+1)%strlen(A[0]);
 
-        Sleep(40);
-        system("cls");
+        Sleep(5);
+        system(CLEAR);
     }
 }
 /** END OF BANNER **/
@@ -82,16 +83,17 @@ void print_phrase(State state){
 	int i=0;
 	printf("\n PHRASE: \n");
 	while(state.PHRASE[i]){
-		if( state.LETTER_GUESSED[state.PHRASE[i]-'a'] ) printf("%c",state.PHRASE[i]);
-        else if(state.PHRASE[i]=='_') printf(" ");
+        if(state.PHRASE[i] == '_') printf("-");
+		else if( state.LETTER_GUESSED[state.PHRASE[i]-'a'] ) printf("%c",state.PHRASE[i]);
         else printf("_");
+        i++;
 	}
 }
 
 //Function displaying game state on screen
 void refresh(State state,int act_player){
 
-	system("cls");
+	system(CLEAR);
 	printf("ROUND %d \n\n", state.NUM_ROUND);
 
 	int i;
