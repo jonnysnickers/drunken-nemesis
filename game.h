@@ -41,7 +41,7 @@ void init(State *state){
 	for(i=0;i<strlen(state->PHRASES[tmp]);i++) state->PHRASE[i] = state->PHRASES[tmp][i];
 	state->PHRASE[strlen(state->PHRASES[tmp])] = 0;
 
-	int value[] = {1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4};
+	int value[] = {100,150,200,250,-1,250,200,150,100,1000,-2,1000,100,150,200,250,-1,250,200,150,100,2000,-3,2000};
 	for(i=0;i<24;i++)state->VALUE[i] = value[i];
 }
 

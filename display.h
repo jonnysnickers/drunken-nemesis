@@ -55,15 +55,16 @@ void banner(int START, int END){
 
 char B[10][1024]={
 "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+",
-"|1|2|3|4|5|6|7|8|9|0|1|2|3|4|5|6|7|8|9|0|1|2|3|4|",
-"| | | | | | | | | | | | | | | | | | | | | | | | |",
-"| | | | | | | | | | | | | | | | | | | | | | | | |",
-"| | | | | | | | | | | | | | | | | | | | | | | | |",
+"|0|0|0|0|B|0|0|0|0|1|E|1|0|0|0|0|B|0|0|0|0|2|L|2|",
+"|1|1|2|2|A|2|2|1|1|0|X|0|1|1|2|2|A|2|2|1|1|0|O|0|",
+"|0|5|0|5|N|5|0|5|0|0|T|0|0|5|0|5|N|5|0|5|0|0|S|0|",
+"|0|0|0|0|C|0|0|0|0|0|R|0|0|0|0|0|C|0|0|0|0|0|E|0|",
 "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+"};
 
 //Draws the wheel
 void writewheel(int POS){
 int i,j;
+    printf("\n");
     for(i=0;i<POS*2+1;i++)
         printf(" ");
     printf("|\n");
@@ -79,30 +80,31 @@ int i,j;
 }
 
 //Function responsible for correct display of guessed phrase
-void print_phrase(State state){
+void print_phrase(State *state){
 	int i=0;
 	printf("\n PHRASE: \n");
-	while(state.PHRASE[i]){
-        if(state.PHRASE[i] == '_') printf("-");
-		else if( state.LETTER_GUESSED[state.PHRASE[i]-'a'] ) printf("%c",state.PHRASE[i]);
+	while(state->PHRASE[i]){
+        if(state->PHRASE[i] == '_') printf("-");
+		else if( state->LETTER_GUESSED[state->PHRASE[i]-'a'] ) printf("%c",state->PHRASE[i]);
         else printf("_");
         i++;
 	}
+	printf("\n");
 }
 
 //Function displaying game state on screen
-void refresh(State state,int act_player){
+void refresh(State *state,int act_player){
 
 	system(CLEAR);
-	printf("ROUND %d \n\n", state.NUM_ROUND);
+	printf("ROUND %d \n\n", state->NUM_ROUND);
 
 	int i;
-	for(i=0; i<state.NUM_PLAYERS; i++){
+	for(i=0; i<state->NUM_PLAYERS; i++){
 		if( i == act_player ) printf(" -->");
 		else printf("    ");
-		printf("%s: %d \n", state.NAMES[i], state.SCORES[i]);
+		printf("%s: %d \n", state->NAMES[i], state->SCORES[i]);
 	}
-	writewheel(state.POSITION);
+	writewheel(state->POSITION);
     print_phrase(state);
 }
 
