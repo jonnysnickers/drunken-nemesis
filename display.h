@@ -1,11 +1,12 @@
-
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
 #include<stdio.h>
 #include<string.h>
 #include<time.h>
+#ifdef _WIN32
 #include<windows.h>
+#endif
 #include "state.h"
 
 /** START OF BANNER **/
@@ -37,7 +38,7 @@ void banner(int START, int END){
         START = (START+1)%strlen(A[0]);
         END = (END+1)%strlen(A[0]);
 #ifdef __linux__
-        Sleep(40);          //<- make it linux
+        //Sleep(40);          //<- make it linux
 #elif _WIN32
         system("cls");      //<- this too
 #endif
