@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <time.h>
-
 #include "game.h"
 
 /*
@@ -16,6 +13,7 @@ void spinwheel(){
 }
 */
 
+/*
 //Each call of this function simulates one round of game
 void next_round(int num){
 	ROUND_ENDED = 0;
@@ -24,11 +22,11 @@ void next_round(int num){
 
 	}
 }
-
+*/
 int main(){
     State state;
 	init(state);
-	refresh(state,1);
+	//refresh(state,1);
 
 return 0;
 }

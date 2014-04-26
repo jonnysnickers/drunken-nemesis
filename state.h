@@ -1,5 +1,5 @@
-#ifndef state.h
-#define state.h
+#ifndef STATE_H
+#define STATE_H
 
 typedef struct game_state{
 

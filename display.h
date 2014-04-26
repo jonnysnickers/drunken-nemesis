@@ -1,7 +1,10 @@
-#ifndef display.h
-#define display.h
+#ifndef DISPLAY_H
+#define DISPLAY_H
 
 #include<stdio.h>
+#include<string.h>
+#include<time.h>
+#include<windows.h>
 #include "state.h"
 
 /** START OF BANNER **/
