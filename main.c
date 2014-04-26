@@ -3,7 +3,7 @@
 
 #include "game.h"
 
-
+/*
 void spinwheel(){
     int tmp = rand()%50 + 5;
     int i;
@@ -14,6 +14,7 @@ void spinwheel(){
         Sleep(40);
     }
 }
+*/
 
 //Each call of this function simulates one round of game
 void next_round(int num){

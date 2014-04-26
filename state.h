@@ -20,6 +20,6 @@ typedef struct game_state{
     int VALUE[24];
 
     int LETTER_GUESSED[27];
-}State
+}State;
 
 #endif
