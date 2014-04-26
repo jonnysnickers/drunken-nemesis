@@ -7,7 +7,7 @@
 void init(State *state){
 
     int i;
-    //banner(0,75);
+    banner(0,75);
     printf("WHEEL OF FORTUNE!\n");
 
     //Clearing tables and variables

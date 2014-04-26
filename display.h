@@ -4,10 +4,17 @@
 #include<stdio.h>
 #include<string.h>
 #include<time.h>
-#ifdef _WIN32
-#include<windows.h>
-#endif
 #include "state.h"
+
+#ifdef _WIN32
+    #include<windows.h>
+#elif __linux__
+    #define Sleep sleep
+    #define System("cls") System("clear")
+    #include<unistd.h>
+#endif
+
+
 
 /** START OF BANNER **/
 char A[10][1024] ={
@@ -37,11 +44,9 @@ void banner(int START, int END){
         writebanner(START,END,A);
         START = (START+1)%strlen(A[0]);
         END = (END+1)%strlen(A[0]);
-#ifdef __linux__
-        //Sleep(40);          //<- make it linux
-#elif _WIN32
-        system("cls");      //<- this too
-#endif
+
+        Sleep(40);
+        system("cls");
     }
 }
 /** END OF BANNER **/
