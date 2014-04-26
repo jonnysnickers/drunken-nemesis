@@ -1,3 +1,4 @@
+
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
@@ -16,7 +17,7 @@ char A[10][1024] ={
             "                                                                                                     | (_/ \\_) || | | |(  ___/(  ___/ | |    ( (_) )| |       | |  ( (_) )| |   | |_ | (_) || ( ) |(  ___/                                                                                                     ",
             "                                                                                                     `\\___x___/'(_) (_)`\\____)`\\____)(___)   `\\___/'(_)       (_)  `\\___/'(_)   `\\__)`\\___/'(_) (_)`\\____)                                                                                                     "};
 
-void writebanner(int START, int END){
+void writebanner(int START, int END,char A[][1024]){
     int j,i;
 
     for(j=0;j<6;j++){
@@ -32,11 +33,14 @@ void banner(int START, int END){
 
     int i;
     for(i = 0;i<220;i++){
-        writebanner(START,END);
+        writebanner(START,END,A);
         START = (START+1)%strlen(A[0]);
         END = (END+1)%strlen(A[0]);
+#ifdef __linux__
         Sleep(40);          //<- make it linux
+#elif _WIN32
         system("cls");      //<- this too
+#endif
     }
 }
 /** END OF BANNER **/

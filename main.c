@@ -28,7 +28,7 @@ int main(){
     State state;
 	init(&state);
 	printf("%d %d %d\n%s\n",state.NUM_PHRASES,state.NUM_PLAYERS,state.NUM_ROUND,state.PHRASE);
-	//refresh(state,1);
+	///refresh(state,1);
 
 return 0;
 }
