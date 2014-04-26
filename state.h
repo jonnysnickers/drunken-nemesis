@@ -11,7 +11,7 @@ typedef struct game_state{
     int TOTAL_SCORES[3];
 
     int NUM_PHRASES;
-    char PHRASES[50][50];
+    char PHRASES[50][1050];
     char PHRASE[50];
 
     int NUM_ROUND;
