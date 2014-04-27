@@ -83,21 +83,29 @@ void round(State *state){
                 }
             break;
             case 3:
-                fail = 1;
+                fail = -1;
                 printf("Guess a phrase.\n");
                 scanf("%s",guess);
                 for(i=0;strlen(guess) == strlen(state->PHRASE) && i<strlen(state->PHRASE);i++)
                     if(state->PHRASE[i] != '_' && state->PHRASE[i] != guess[i])
                             fail = 1;
+                    else if( (i == strlen(state->PHRASE) - 1) && fail == -1 )
+                        fail = 0;
                 if(fail == 0){
                     state->ROUND_ENDED = 1;
                     for(i=0;i<strlen(state->PHRASE);i++)
                         if(state->LETTER_GUESSED[state->PHRASE[i]-'a'] == 0)
                             counter++;
-                    state->SCORES[act_player] += counter * 250;
+                    state->SCORES[act_player] += counter * 500;
                 }
+                act_player = (act_player + 1)%state->NUM_PLAYERS;
             break;
             default:
+                printf("Penalty Bancrout, press SPACE to continue\n");
+                state->SCORES[act_player] = 0;
+                act_player = (act_player + 1)%state->NUM_PLAYERS;
+                getch();
+                fflush(stdin);
             break;
 		}
 	}
