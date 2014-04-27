@@ -58,7 +58,7 @@ void round(State *state){
                 else{
                     printf("Guess a consonant.\n");
                     scanf("%s",c);
-                    if(state->LETTER_GUESSED[c[0] - 'a'] == 0 && (c[0] != 'a' || c[0] != 'e' || c[0] != 'i' || c[0] != 'o' || c[0] != 'u'))
+                    if(state->LETTER_GUESSED[c[0] - 'a'] == 0 && (c[0] != 'a' && c[0] != 'e' && c[0] != 'i' && c[0] != 'o' && c[0] != 'u'))
                         for(i=0;i<strlen(state->PHRASE);i++){
                             if(state->PHRASE[i] == c[0]){
                                 state->LETTER_GUESSED[c[0] - 'a'] = 1;
