@@ -101,6 +101,9 @@ void round(State *state){
             break;
 		}
 	}
+	int h;
+	for(h=0;h<state->NUM_PLAYERS;h++)
+        state->TOTAL_SCORES[h] += state->SCORES[h];
 }
 
 void reset( State *state, int i ){
@@ -114,6 +117,18 @@ void reset( State *state, int i ){
 	for(i=0;i<strlen(state->PHRASES[tmp]);i++) state->PHRASE[i] = state->PHRASES[tmp][i];
 	state->PHRASE[strlen(state->PHRASES[tmp])] = 0;
 }
+void write_result(State *state){
+    int i,winner,result = 0;
+    printf("Final score are:\n");
+    for(i=0;i<state->NUM_PLAYERS;i++){
+        printf("%s:\t%d\n",state->NAMES[i],state->TOTAL_SCORES[i]);
+        if(state->TOTAL_SCORES[i] > result){
+            winner = i;
+            result = state->TOTAL_SCORES[i];
+        }
+    }
+    printf("\nThe winner is %s with %d Euros\n", state->NAMES[winner], state->TOTAL_SCORES[i]);
+}
 
 int main(){
     int i;
@@ -123,6 +138,8 @@ int main(){
         reset(&state, i);
         round(&state);
 	}
+	system(CLEAR);
+	write_result(&state);
 
 return 0;
 }

@@ -102,7 +102,7 @@ void refresh(State *state,int act_player){
 	for(i=0; i<state->NUM_PLAYERS; i++){
 		if( i == act_player ) printf(" -->");
 		else printf("    ");
-		printf("%s: %d \n", state->NAMES[i], state->SCORES[i]);
+		printf("%s: \t%d \n", state->NAMES[i], state->SCORES[i]);
 	}
 	writewheel(state->POSITION);
     print_phrase(state);
