@@ -83,7 +83,7 @@ void round(State *state){
                 }
             break;
             case 3:
-                fail = 0;
+                fail = 1;
                 printf("Guess a phrase.\n");
                 scanf("%s",guess);
                 for(i=0;strlen(guess) == strlen(state->PHRASE) && i<strlen(state->PHRASE);i++)
@@ -127,7 +127,7 @@ void write_result(State *state){
             result = state->TOTAL_SCORES[i];
         }
     }
-    printf("\nThe winner is %s with %d Euros\n", state->NAMES[winner], state->TOTAL_SCORES[i]);
+    printf("\nThe winner is %s with %d Euros\n", state->NAMES[winner], state->TOTAL_SCORES[winner]);
 }
 
 int main(){
