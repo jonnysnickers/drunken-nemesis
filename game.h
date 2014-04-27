@@ -15,8 +15,6 @@ void init(State *state){
 	for(i=0;i<3;i++) state->SCORES[i] = 0;
 	for(i=0;i<3;i++) state->TOTAL_SCORES[i] = 0;
     state->POSITION = 0;
-    state->NUM_ROUND = 1;
-    state->ROUND_ENDED = 0;
 
 	//Setting rand seed
 	srand(time(0));

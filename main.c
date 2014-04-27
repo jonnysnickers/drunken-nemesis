@@ -103,11 +103,26 @@ void round(State *state){
 	}
 }
 
+void reset( State *state, int i ){
+    int j;
+    state->NUM_ROUND = i;
+    state->ROUND_ENDED = 0;
+    for(i=0; i<26; i++) state->LETTER_GUESSED[i] = 0;
+	for(i=0;i<3;i++) state->SCORES[i] = 0;
+
+    int tmp = rand()%state->NUM_PHRASES;
+	for(i=0;i<strlen(state->PHRASES[tmp]);i++) state->PHRASE[i] = state->PHRASES[tmp][i];
+	state->PHRASE[strlen(state->PHRASES[tmp])] = 0;
+}
+
 int main(){
     int i;
     State state;
-	init(&state);
-	round(&state);
+    init(&state);
+	for(i = 1; i <= 3; i++){
+        reset(&state, i);
+        round(&state);
+	}
 
 return 0;
 }
