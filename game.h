@@ -35,10 +35,6 @@ void init(State *state){
 	state->NUM_PHRASES--;
 	fclose(fp);
 
-	int tmp = rand()%state->NUM_PHRASES;
-	for(i=0;i<strlen(state->PHRASES[tmp]);i++) state->PHRASE[i] = state->PHRASES[tmp][i];
-	state->PHRASE[strlen(state->PHRASES[tmp])] = 0;
-
 	int value[] = {100,150,200,250,-1,250,200,150,100,1000,-2,1000,100,150,200,250,-1,250,200,150,100,2000,-3,2000};
 	for(i=0;i<24;i++)state->VALUE[i] = value[i];
 }
