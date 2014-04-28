@@ -18,6 +18,10 @@
 
 
 /** START OF BANNER **/
+/**
+*   This part of code is responsible for the
+*   display of banner at the beggining of the game.
+**/
 char A[10][1024] ={
             "                                                                                                      _       _  _                    _                ___       ___             _                                                                                                                             ",
             "                                                                                                     ( )  _  ( )( )                  (_ )            /'___)    /'___)           ( )_                                                                                                                           ",
@@ -55,22 +59,22 @@ void banner(int START, int END){
 
 char B[10][1024]={
 "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+",
-"|0|0|0|0|B|0|0|0|0|1|E|1|0|0|0|0|B|0|0|0|0|2|L|2|",
+"| | | | |B| | | | |1|E|1| | | | |B| | | | |2|L|2|",
 "|1|1|2|2|A|2|2|1|1|0|X|0|1|1|2|2|A|2|2|1|1|0|O|0|",
 "|0|5|0|5|N|5|0|5|0|0|T|0|0|5|0|5|N|5|0|5|0|0|S|0|",
 "|0|0|0|0|C|0|0|0|0|0|R|0|0|0|0|0|C|0|0|0|0|0|E|0|",
 "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+"};
 
-//Draws the wheel
+/**
+*  This function animates the wheel.
+**/
 void writewheel(int POS){
 int i,j;
     printf("\n");
-    for(i=0;i<POS*2+1;i++)
-        printf(" ");
+    for(i=0;i<POS*2+1;i++)printf(" ");
     printf("|\n");
 
-    for(i=0;i<POS*2+1;i++)
-        printf(" ");
+    for(i=0;i<POS*2+1;i++)printf(" ");
     printf("V\n");
 
     for(i=0;i<6;i++){
@@ -79,7 +83,9 @@ int i,j;
     }
 }
 
-//Function responsible for correct display of guessed phrase
+/**
+*   Function responsible for correct display of guessed phrase
+**/
 void print_phrase(State *state){
 	int i=0;
 	printf("\n PHRASE: \n");
@@ -92,7 +98,9 @@ void print_phrase(State *state){
 	printf("\n");
 }
 
-//Function displaying game state on screen
+/**
+*   Function displaying game state on screen
+**/
 void refresh(State *state,int act_player){
 
 	system(CLEAR);
@@ -106,6 +114,23 @@ void refresh(State *state,int act_player){
 	}
 	writewheel(state->POSITION);
     print_phrase(state);
+}
+
+/**
+*   This function writes the result in the end.
+**/
+void write_result(State *state){
+    system(CLEAR);
+    int i,winner,result = 0;
+    printf("Final score are:\n");
+    for(i=0;i<state->NUM_PLAYERS;i++){
+        printf("%s:\t%d\n",state->NAMES[i],state->TOTAL_SCORES[i]);
+        if(state->TOTAL_SCORES[i] > result){
+            winner = i;
+            result = state->TOTAL_SCORES[i];
+        }
+    }
+    printf("\nThe winner is %s with %d Euros\n", state->NAMES[winner], state->TOTAL_SCORES[winner]);
 }
 
 #endif

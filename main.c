@@ -1,24 +1,13 @@
 #include "game.h"
-
-
-void spinwheel(State *state,int act_player){
-    int tmp = rand()%50 + 5;
-    int i;
-    for(i = 0;i<tmp;i++){
-        state->POSITION = (state->POSITION+1)%24;
-        refresh(state,act_player);
-        Sleep(40);
-    }
-}
-
-
-
-//Each call of this function simulates one round of game
+/**
+*   Each call of this function simulates one round of game
+**/
 void round(State *state){
     char c[2];
     int tmp,i,counter,temp,playercontinue,fail;
     int act_player = rand()%state->NUM_PLAYERS;
 
+    //Main loop
 	while(!state->ROUND_ENDED){
         counter = 0;
         playercontinue = 0;
@@ -29,10 +18,11 @@ void round(State *state){
 		printf("  What do you want to do?\n   1.Guess a consonant.\n   2.Buy vovel.\n   3.Guess word.\n");
         scanf("%d",&tmp);
 
+        //Switch that handle the decision of player
 		switch(tmp){
             case 1:
                 spinwheel(state,act_player);
-
+                //Here we handle the case of bancrupt, free and lose
                 temp = state->VALUE[state->POSITION];
                 if(temp < 0){
                     if(temp == -1){
@@ -100,6 +90,7 @@ void round(State *state){
                 }
                 act_player = (act_player + 1)%state->NUM_PLAYERS;
             break;
+            //Penalty for typig in something different than 1,2,3.
             default:
                 printf("Penalty Bancrout, press SPACE to continue\n");
                 state->SCORES[act_player] = 0;
@@ -114,39 +105,18 @@ void round(State *state){
         state->TOTAL_SCORES[h] += state->SCORES[h];
 }
 
-void reset( State *state, int i ){
-    int j;
-    state->NUM_ROUND = i;
-    state->ROUND_ENDED = 0;
-    for(i=0; i<26; i++) state->LETTER_GUESSED[i] = 0;
-	for(i=0;i<3;i++) state->SCORES[i] = 0;
-
-    int tmp = rand()%state->NUM_PHRASES;
-	for(i=0;i<strlen(state->PHRASES[tmp]);i++) state->PHRASE[i] = state->PHRASES[tmp][i];
-	state->PHRASE[strlen(state->PHRASES[tmp])] = 0;
-}
-void write_result(State *state){
-    int i,winner,result = 0;
-    printf("Final score are:\n");
-    for(i=0;i<state->NUM_PLAYERS;i++){
-        printf("%s:\t%d\n",state->NAMES[i],state->TOTAL_SCORES[i]);
-        if(state->TOTAL_SCORES[i] > result){
-            winner = i;
-            result = state->TOTAL_SCORES[i];
-        }
-    }
-    printf("\nThe winner is %s with %d Euros\n", state->NAMES[winner], state->TOTAL_SCORES[winner]);
-}
-
 int main(){
     int i;
     State state;
+
+    banner(0,75);
     init(&state);
+
 	for(i = 1; i <= 3; i++){
-        reset(&state, i);
+        reset(&state);
         round(&state);
 	}
-	system(CLEAR);
+
 	write_result(&state);
 
 return 0;
