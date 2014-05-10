@@ -6,14 +6,9 @@
 #include<time.h>
 #include "state.h"
 
-#ifdef _WIN32
-    #include<windows.h>
-    #define CLEAR "cls"
-#elif __linux__
-    #define Sleep sleep
-    #define CLEAR "clear"
-    #include<unistd.h>
-#endif
+#include<windows.h>
+#define CLEAR "cls"
+
 
 
 
@@ -42,7 +37,7 @@ void writebanner(int START, int END,char A[][1024]){
 
 }
 /** 0 & 75 are nice **/
-void banner(int START, int END){
+void banner(int START, int END){	// <START;END> is an interval of visible columns in array
 
     int i;
     for(i = 0;i<220;i++){
@@ -101,23 +96,24 @@ void print_phrase(State *state){
 /**
 *   Function displaying game state on screen
 **/
-void refresh(State *state,int act_player){
+void refresh(State *state ){
 
 	system(CLEAR);
 	printf("ROUND %d \n\n", state->NUM_ROUND);
 
 	int i;
 	for(i=0; i<state->NUM_PLAYERS; i++){
-		if( i == act_player ) printf(" -->");
+		if( i == state->CURRENT_PLAYER ) printf(" -->");
 		else printf("    ");
 		printf("%s: \t%d \n", state->NAMES[i], state->SCORES[i]);
 	}
+	printf("Chances left: %d\n", state->PLAYERCONTINUE );
 	writewheel(state->POSITION);
     print_phrase(state);
 }
 
 /**
-*   This function writes the result in the end.
+*   This function writes the final result.
 **/
 void write_result(State *state){
     system(CLEAR);
