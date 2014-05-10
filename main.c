@@ -71,6 +71,14 @@ void round(State *state){
                             if(state->PHRASE[i] == c[0])
                                 state->LETTER_GUESSED[c[0] - 'a'] = 1;
                 }
+		else {
+		    if( state->SCORES[act_player] > 100 ){
+		        state->SCORES[act_player] -= 100;
+		    }
+		    else{
+			state->SCORES[act_player] = 0;
+		    }
+		}
             break;
             case 3:
                 fail = -1;
